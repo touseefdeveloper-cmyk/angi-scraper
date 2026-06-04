@@ -2,8 +2,8 @@ name: Scrape Angi Reviews
 
 on:
   schedule:
-    - cron: "0 8 * * 1"   # Every Monday at 8:00 AM UTC
-  workflow_dispatch:       # Also allows you to run it manually from GitHub
+    - cron: "0 9 * * 1"   # Every Monday at 9:00 AM UTC (1 hour after BBB)
+  workflow_dispatch:
 
 permissions:
   contents: write
