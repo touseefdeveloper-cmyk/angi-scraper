@@ -22,25 +22,33 @@ BUSINESSES = [
 
 RETRY_DELAY = 30
 
+PROXY_ATTEMPTS = [
+    ("residential", 2),
+    ("stealth",     2),
+]
+
 
 def parse_reviews_from_text(text: str) -> dict:
     """
-    Angi shows: "4.9\n168 Reviews" when reviews exist
-    or just "0 Reviews" when none
+    Angi shows rating and count in heading as: [4.7(388)](#reviews)
+    Fallback: FAQ section says "currently rated 4.7 overall out of 5"
     """
     total_reviews = None
     average_rating = None
 
-    # Has reviews: rating and count on adjacent lines
-    m = re.search(r"([\d.]+)\n([\d,]+)\s+Reviews?", text)
+    # Primary: [4.7(388)](#reviews) format in heading
+    m = re.search(r'\[([\d.]+)\((\d+)\)\]\(#reviews\)', text)
     if m:
         average_rating = m.group(1)
-        total_reviews = m.group(2).replace(",", "")
+        total_reviews = m.group(2)
     else:
-        # No reviews or just a count
-        m = re.search(r"([\d,]+)\s+Reviews?", text)
+        # Fallback: FAQ section
+        m = re.search(r'currently rated ([\d.]+) overall out of 5', text)
         if m:
-            total_reviews = m.group(1).replace(",", "")
+            average_rating = m.group(1)
+        m2 = re.search(r'([\d,]+)\s+Reviews?', text)
+        if m2:
+            total_reviews = m2.group(1).replace(",", "")
 
     return {"total_reviews": total_reviews, "average_rating": average_rating}
 
@@ -67,10 +75,7 @@ def scrape_angi(business: dict) -> dict:
 
     print(f"  [{business['id']}] Scraping ...")
 
-    proxy_attempts = [
-        ("residential", 2),
-        ("stealth",     2),
-    ]
+    proxy_attempts = PROXY_ATTEMPTS
 
     last_error = None
     for proxy, tries in proxy_attempts:
@@ -115,7 +120,7 @@ def main():
     for business in BUSINESSES:
         result = scrape_angi(business)
         results.append(result)
-        time.sleep(8)
+        time.sleep(12)
 
     output_file = "angi_reviews.json"
     with open(output_file, "w", encoding="utf-8") as f:
