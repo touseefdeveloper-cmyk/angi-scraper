@@ -30,22 +30,24 @@ PROXY_ATTEMPTS = [
 
 def parse_reviews_from_text(text: str) -> dict:
     """
-    Angi shows rating and count in heading as: [4.7(388)](#reviews)
-    Fallback: FAQ section says "currently rated 4.7 overall out of 5"
+    After /text endpoint processing, Angi renders as:
+      Primary:  "4.7(388)"  (markdown links get stripped)
+      Fallback: "currently rated 4.7 overall out of 5" in FAQ section
     """
     total_reviews = None
     average_rating = None
 
-    # Primary: [4.7(388)](#reviews) format in heading
-    m = re.search(r'\[([\d.]+)\((\d+)\)\]\(#reviews\)', text)
+    # Primary: "4.7(388)" — rating and count together
+    m = re.search(r'([\d.]+)\((\d+)\)', text)
     if m:
         average_rating = m.group(1)
         total_reviews = m.group(2)
     else:
-        # Fallback: FAQ section
+        # Fallback: FAQ section rating
         m = re.search(r'currently rated ([\d.]+) overall out of 5', text)
         if m:
             average_rating = m.group(1)
+        # Fallback: standalone review count
         m2 = re.search(r'([\d,]+)\s+Reviews?', text)
         if m2:
             total_reviews = m2.group(1).replace(",", "")
@@ -75,7 +77,10 @@ def scrape_angi(business: dict) -> dict:
 
     print(f"  [{business['id']}] Scraping ...")
 
-    proxy_attempts = PROXY_ATTEMPTS
+    # Use stealth first for pages that are known to get blocked with residential
+    known_hard_pages = ["my-home-builders-inc"]
+    is_hard = any(h in business["angi_url"] for h in known_hard_pages)
+    proxy_attempts = [("stealth", 3)] if is_hard else PROXY_ATTEMPTS
 
     last_error = None
     for proxy, tries in proxy_attempts:
