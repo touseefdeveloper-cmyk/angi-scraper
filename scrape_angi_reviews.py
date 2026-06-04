@@ -22,35 +22,23 @@ BUSINESSES = [
 
 RETRY_DELAY = 30
 
-PROXY_ATTEMPTS = [
-    ("residential", 2),
-    ("stealth",     2),
-]
-
 
 def parse_reviews_from_text(text: str) -> dict:
     """
-    After /text endpoint processing, Angi renders as:
-      Primary:  "4.7(388)"  (markdown links get stripped)
-      Fallback: "currently rated 4.7 overall out of 5" in FAQ section
+    Angi pages use exactly these formats (confirmed from live page):
+      - "168 Reviews"
+      - "rated 4.9 overall out of 5"
     """
     total_reviews = None
     average_rating = None
 
-    # Primary: "4.7(388)" — rating and count together
-    m = re.search(r'([\d.]+)\((\d+)\)', text)
+    m = re.search(r"([\d,]+)\s+Reviews", text, re.IGNORECASE)
+    if m:
+        total_reviews = m.group(1).replace(",", "")
+
+    m = re.search(r"rated\s+([\d.]+)\s+overall out of 5", text, re.IGNORECASE)
     if m:
         average_rating = m.group(1)
-        total_reviews = m.group(2)
-    else:
-        # Fallback: FAQ section rating
-        m = re.search(r'currently rated ([\d.]+) overall out of 5', text)
-        if m:
-            average_rating = m.group(1)
-        # Fallback: standalone review count
-        m2 = re.search(r'([\d,]+)\s+Reviews?', text)
-        if m2:
-            total_reviews = m2.group(1).replace(",", "")
 
     return {"total_reviews": total_reviews, "average_rating": average_rating}
 
@@ -77,10 +65,11 @@ def scrape_angi(business: dict) -> dict:
 
     print(f"  [{business['id']}] Scraping ...")
 
-    # Use stealth first for pages that are known to get blocked with residential
-    known_hard_pages = ["my-home-builders-inc"]
-    is_hard = any(h in business["angi_url"] for h in known_hard_pages)
-    proxy_attempts = [("stealth", 3)] if is_hard else PROXY_ATTEMPTS
+    # Try residential first (cheaper), then stealth if blocked
+    proxy_attempts = [
+        ("residential", 2),
+        ("stealth",     2),
+    ]
 
     last_error = None
     for proxy, tries in proxy_attempts:
@@ -90,7 +79,7 @@ def scrape_angi(business: dict) -> dict:
                 text = fetch_text(business["angi_url"], proxy)
                 parsed = parse_reviews_from_text(text)
 
-                if parsed["total_reviews"] is None:
+                if parsed["total_reviews"] is None and parsed["average_rating"] is None:
                     snippet = " ".join(text.split())[:300]
                     print(f"    ⚠ Page loaded but could not parse data. Snippet: {snippet}")
 
@@ -125,7 +114,7 @@ def main():
     for business in BUSINESSES:
         result = scrape_angi(business)
         results.append(result)
-        time.sleep(12)
+        time.sleep(8)
 
     output_file = "angi_reviews.json"
     with open(output_file, "w", encoding="utf-8") as f:
