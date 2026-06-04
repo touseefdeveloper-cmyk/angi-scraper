@@ -1,0 +1,40 @@
+name: Scrape Angi Reviews
+
+on:
+  schedule:
+    - cron: "0 8 * * 1"   # Every Monday at 8:00 AM UTC
+  workflow_dispatch:       # Also allows you to run it manually from GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run scraper
+        env:
+          WEBSCRAPING_AI_KEY_ANGI: ${{ secrets.WEBSCRAPING_AI_KEY_ANGI }}
+        run: python scrape_angi_reviews.py
+
+      - name: Commit and push results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add angi_reviews.json
+          git diff --cached --quiet || git commit -m "Update Angi reviews data [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+          git push
