@@ -25,20 +25,34 @@ RETRY_DELAY = 30
 
 def parse_reviews_from_text(text: str) -> dict:
     """
-    Angi pages use exactly these formats (confirmed from live page):
-      - "168 Reviews"
-      - "rated 4.9 overall out of 5"
+    Angi rating patterns in order of reliability:
+      1. [4.9(168)] — compact format in heading
+      2. "rated 4.9 overall out of 5" — FAQ section
+      3. "4.9\n168 Reviews" — number right before review count
     """
     total_reviews = None
     average_rating = None
 
+    # Total reviews — "168 Reviews"
     m = re.search(r"([\d,]+)\s+Reviews", text, re.IGNORECASE)
     if m:
         total_reviews = m.group(1).replace(",", "")
 
-    m = re.search(r"rated\s+([\d.]+)\s+overall out of 5", text, re.IGNORECASE)
-    if m:
-        average_rating = m.group(1)
+    # Rating — try multiple patterns in order
+    rating_patterns = [
+        r"\[([\d.]+)\(\d+\)\]",                        # [4.9(168)]
+        r"rated\s+([\d.]+)\s+overall\s+out\s+of\s+5",  # rated 4.9 overall out of 5
+        r"([\d.]+)\s*\n+\s*[\d,]+\s+Reviews",          # 4.9 \n 168 Reviews
+        r"([\d.]+)\s+out\s+of\s+5",                    # 4.9 out of 5
+    ]
+    for pattern in rating_patterns:
+        m = re.search(pattern, text, re.IGNORECASE)
+        if m:
+            val = m.group(1)
+            # Sanity check: rating must be between 1.0 and 5.0
+            if 1.0 <= float(val) <= 5.0:
+                average_rating = val
+                break
 
     return {"total_reviews": total_reviews, "average_rating": average_rating}
 
@@ -65,7 +79,6 @@ def scrape_angi(business: dict) -> dict:
 
     print(f"  [{business['id']}] Scraping ...")
 
-    # Try residential first (cheaper), then stealth if blocked
     proxy_attempts = [
         ("residential", 2),
         ("stealth",     2),
@@ -79,9 +92,9 @@ def scrape_angi(business: dict) -> dict:
                 text = fetch_text(business["angi_url"], proxy)
                 parsed = parse_reviews_from_text(text)
 
-                if parsed["total_reviews"] is None and parsed["average_rating"] is None:
-                    snippet = " ".join(text.split())[:300]
-                    print(f"    ⚠ Page loaded but could not parse data. Snippet: {snippet}")
+                if parsed["total_reviews"] is None or parsed["average_rating"] is None:
+                    snippet = " ".join(text.split())[:400]
+                    print(f"    ⚠ Partial parse — reviews:{parsed['total_reviews']} rating:{parsed['average_rating']}. Snippet: {snippet}")
 
                 result = {
                     "id": business["id"],
@@ -114,7 +127,7 @@ def main():
     for business in BUSINESSES:
         result = scrape_angi(business)
         results.append(result)
-        time.sleep(8)
+        time.sleep(15)  # increased delay between businesses
 
     output_file = "angi_reviews.json"
     with open(output_file, "w", encoding="utf-8") as f:
