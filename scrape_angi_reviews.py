@@ -27,10 +27,17 @@ def parse_reviews_from_text(text: str) -> dict:
     total_reviews = None
     average_rating = None
 
-    # Total reviews — "168 Reviews" or "1 Reviews"
-    m = re.search(r"([\d,]+)\s+Reviews", text, re.IGNORECASE)
-    if m:
-        total_reviews = m.group(1).replace(",", "")
+    # Total reviews — try multiple patterns in order of reliability
+    for pattern in [
+        r"([\d,]+)\s+Reviews",          # "168 Reviews" or "1 Reviews"
+        r"\[[\d.]+\((\d+)\)\]",         # [4.9(168)] — extract count from heading link
+        r"Showing \d+-\d+ of (\d+)",    # "Showing 1-1 of 1 reviews"
+        r"(\d+)\s+review",              # generic fallback
+    ]:
+        m = re.search(pattern, text, re.IGNORECASE)
+        if m:
+            total_reviews = m.group(1).replace(",", "")
+            break
 
     # Rating — multiple patterns in order of reliability
     rating_patterns = [
@@ -55,10 +62,16 @@ def parse_reviews_from_html(html: str) -> dict:
     total_reviews = None
     average_rating = None
 
-    # e.g. <span>168 Reviews</span> or >168 Reviews<
-    m = re.search(r">([\d,]+)\s+Reviews<", html, re.IGNORECASE)
-    if m:
-        total_reviews = m.group(1).replace(",", "")
+    # Total reviews from HTML
+    for pattern in [
+        r">([\d,]+)\s+Reviews<",
+        r"Showing \d+-\d+ of (\d+)",
+        r'"reviewCount"\s*:\s*"?(\d+)"?',
+    ]:
+        m = re.search(pattern, html, re.IGNORECASE)
+        if m:
+            total_reviews = m.group(1).replace(",", "")
+            break
 
     # e.g. "ratingValue":"4.9" or ratingValue: 4.9
     for pattern in [
