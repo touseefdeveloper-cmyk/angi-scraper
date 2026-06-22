@@ -3,20 +3,20 @@
     "id": "cabinet-refresh",
     "angi_url": "https://www.angi.com/companylist/us/ca/los-angeles/cabinet-refresh-reviews-6568336.htm",
     "total_reviews": "168",
-    "average_rating": "4.9",
+    "average_rating": "5",
     "error": null
   },
   {
     "id": "american-vision-windows",
     "angi_url": "https://www.angi.com/companylist/us/ca/tustin/american-vision-windows-reviews-3911626.htm",
-    "total_reviews": "388",
-    "average_rating": "4.7",
+    "total_reviews": null,
+    "average_rating": null,
     "error": null
   },
   {
     "id": "one-week-bath",
     "angi_url": "https://www.angi.com/companylist/us/ca/van-nuys/one-week-bath-reviews-184509.htm",
-    "total_reviews": "62",
+    "total_reviews": null,
     "average_rating": "4.7",
     "error": null
   },
@@ -38,14 +38,14 @@
     "id": "mr-cabinet-care",
     "angi_url": "https://www.angi.com/companylist/us/ca/woodland-hills/my-home-builders-inc-reviews-1.htm",
     "total_reviews": "1",
-    "average_rating": "5.0",
+    "average_rating": "5",
     "error": null
   },
   {
     "id": "payless-kitchen-cabinets",
     "angi_url": "https://www.angi.com/companylist/us/ca/glendale/payless-kitchen-cabinets-and-bath-makeover-reviews-1.htm",
     "total_reviews": "13",
-    "average_rating": "5.0",
+    "average_rating": "5",
     "error": null
   },
   {
