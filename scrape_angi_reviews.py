@@ -10,14 +10,14 @@ HTML_URL = "https://api.webscraping.ai/html"
 
 BUSINESSES = [
     {"id": "cabinet-refresh",          "angi_url": "https://www.angi.com/companylist/us/ca/los-angeles/cabinet-refresh-reviews-6568336.htm"},
-    {"id": "american-vision-windows",  "angi_url": "https://www.angi.com/companylist/us/ca/tustin/american-vision-windows-reviews-3911626.htm"},
+    {"id": "american-vision-windows",  "angi_url": "https://www.angi.com/companylist/us/az/gilbert/american-vision-windows-reviews-6404728.htm"},
     {"id": "one-week-bath",            "angi_url": "https://www.angi.com/companylist/us/ca/van-nuys/one-week-bath-reviews-184509.htm"},
     {"id": "abc-pro",                  "angi_url": "https://www.angi.com/companylist/us/ca/reseda/abraham-building-consulting-inc-reviews-1.htm"},
-    {"id": "1-degree-construction",    "angi_url": None},
+    {"id": "1-degree-construction",    "angi_url": "https://www.angi.com/companylist/us/ca/dublin/-degree-construction-reviews-134063736.htm"},
     {"id": "mr-cabinet-care",          "angi_url": "https://www.angi.com/companylist/us/ca/woodland-hills/my-home-builders-inc-reviews-1.htm"},
     {"id": "payless-kitchen-cabinets", "angi_url": "https://www.angi.com/companylist/us/ca/glendale/payless-kitchen-cabinets-and-bath-makeover-reviews-1.htm"},
     {"id": "adar-builders",            "angi_url": "https://www.angi.com/companylist/us/ca/los-angeles/adar-builders-inc-reviews-9993206.htm"},
-    {"id": "gm-home-remodeling",       "angi_url": None},
+    {"id": "gm-home-remodeling",       "angi_url": "https://www.angi.com/companylist/us/ca/north-hollywood/g-m-home-remodeling-inc-reviews-71478956.htm"},
 ]
 
 RETRY_DELAY = 30
