@@ -2,64 +2,64 @@
   {
     "id": "cabinet-refresh",
     "angi_url": "https://www.angi.com/companylist/us/ca/los-angeles/cabinet-refresh-reviews-6568336.htm",
-    "total_reviews": "168",
-    "average_rating": "5",
-    "error": null
+    "total_reviews": null,
+    "average_rating": null,
+    "error": "402 Client Error: Payment Required for url: https://api.webscraping.ai/text?api_key=df11b57b-f78d-4699-9c32-72974fa70c15&url=https%3A%2F%2Fwww.angi.com%2Fcompanylist%2Fus%2Fca%2Flos-angeles%2Fcabinet-refresh-reviews-6568336.htm&js=true&proxy=stealth&timeout=30000&country=us&wait_for=h1"
   },
   {
     "id": "american-vision-windows",
-    "angi_url": "https://www.angi.com/companylist/us/ca/tustin/american-vision-windows-reviews-3911626.htm",
+    "angi_url": "https://www.angi.com/companylist/us/az/gilbert/american-vision-windows-reviews-6404728.htm",
     "total_reviews": null,
     "average_rating": null,
-    "error": null
+    "error": "402 Client Error: Payment Required for url: https://api.webscraping.ai/text?api_key=df11b57b-f78d-4699-9c32-72974fa70c15&url=https%3A%2F%2Fwww.angi.com%2Fcompanylist%2Fus%2Faz%2Fgilbert%2Famerican-vision-windows-reviews-6404728.htm&js=true&proxy=stealth&timeout=30000&country=us&wait_for=h1"
   },
   {
     "id": "one-week-bath",
     "angi_url": "https://www.angi.com/companylist/us/ca/van-nuys/one-week-bath-reviews-184509.htm",
     "total_reviews": null,
-    "average_rating": "4.7",
-    "error": null
+    "average_rating": null,
+    "error": "402 Client Error: Payment Required for url: https://api.webscraping.ai/text?api_key=df11b57b-f78d-4699-9c32-72974fa70c15&url=https%3A%2F%2Fwww.angi.com%2Fcompanylist%2Fus%2Fca%2Fvan-nuys%2Fone-week-bath-reviews-184509.htm&js=true&proxy=stealth&timeout=30000&country=us&wait_for=h1"
   },
   {
     "id": "abc-pro",
     "angi_url": "https://www.angi.com/companylist/us/ca/reseda/abraham-building-consulting-inc-reviews-1.htm",
-    "total_reviews": "7",
-    "average_rating": "4.3",
-    "error": null
+    "total_reviews": null,
+    "average_rating": null,
+    "error": "402 Client Error: Payment Required for url: https://api.webscraping.ai/text?api_key=df11b57b-f78d-4699-9c32-72974fa70c15&url=https%3A%2F%2Fwww.angi.com%2Fcompanylist%2Fus%2Fca%2Freseda%2Fabraham-building-consulting-inc-reviews-1.htm&js=true&proxy=stealth&timeout=30000&country=us&wait_for=h1"
   },
   {
     "id": "1-degree-construction",
-    "angi_url": null,
+    "angi_url": "https://www.angi.com/companylist/us/ca/dublin/-degree-construction-reviews-134063736.htm",
     "total_reviews": null,
     "average_rating": null,
-    "error": "No URL provided"
+    "error": "402 Client Error: Payment Required for url: https://api.webscraping.ai/text?api_key=df11b57b-f78d-4699-9c32-72974fa70c15&url=https%3A%2F%2Fwww.angi.com%2Fcompanylist%2Fus%2Fca%2Fdublin%2F-degree-construction-reviews-134063736.htm&js=true&proxy=stealth&timeout=30000&country=us&wait_for=h1"
   },
   {
     "id": "mr-cabinet-care",
-    "angi_url": "https://www.angi.com/companylist/us/ca/woodland-hills/my-home-builders-inc-reviews-1.htm",
-    "total_reviews": "1",
-    "average_rating": "5",
-    "error": null
+    "angi_url": "https://www.angi.com/companylist/us/ca/anaheim/mr-cabinet-care-reviews-204301.htm",
+    "total_reviews": null,
+    "average_rating": null,
+    "error": "402 Client Error: Payment Required for url: https://api.webscraping.ai/text?api_key=df11b57b-f78d-4699-9c32-72974fa70c15&url=https%3A%2F%2Fwww.angi.com%2Fcompanylist%2Fus%2Fca%2Fanaheim%2Fmr-cabinet-care-reviews-204301.htm&js=true&proxy=stealth&timeout=30000&country=us&wait_for=h1"
   },
   {
     "id": "payless-kitchen-cabinets",
     "angi_url": "https://www.angi.com/companylist/us/ca/glendale/payless-kitchen-cabinets-and-bath-makeover-reviews-1.htm",
-    "total_reviews": "13",
-    "average_rating": "5",
-    "error": null
+    "total_reviews": null,
+    "average_rating": null,
+    "error": "402 Client Error: Payment Required for url: https://api.webscraping.ai/text?api_key=df11b57b-f78d-4699-9c32-72974fa70c15&url=https%3A%2F%2Fwww.angi.com%2Fcompanylist%2Fus%2Fca%2Fglendale%2Fpayless-kitchen-cabinets-and-bath-makeover-reviews-1.htm&js=true&proxy=stealth&timeout=30000&country=us&wait_for=h1"
   },
   {
     "id": "adar-builders",
     "angi_url": "https://www.angi.com/companylist/us/ca/los-angeles/adar-builders-inc-reviews-9993206.htm",
-    "total_reviews": "1",
-    "average_rating": "5.0",
-    "error": null
+    "total_reviews": null,
+    "average_rating": null,
+    "error": "402 Client Error: Payment Required for url: https://api.webscraping.ai/text?api_key=df11b57b-f78d-4699-9c32-72974fa70c15&url=https%3A%2F%2Fwww.angi.com%2Fcompanylist%2Fus%2Fca%2Flos-angeles%2Fadar-builders-inc-reviews-9993206.htm&js=true&proxy=stealth&timeout=30000&country=us&wait_for=h1"
   },
   {
     "id": "gm-home-remodeling",
-    "angi_url": null,
+    "angi_url": "https://www.angi.com/companylist/us/ca/north-hollywood/g-m-home-remodeling-inc-reviews-71478956.htm",
     "total_reviews": null,
     "average_rating": null,
-    "error": "No URL provided"
+    "error": "402 Client Error: Payment Required for url: https://api.webscraping.ai/text?api_key=df11b57b-f78d-4699-9c32-72974fa70c15&url=https%3A%2F%2Fwww.angi.com%2Fcompanylist%2Fus%2Fca%2Fnorth-hollywood%2Fg-m-home-remodeling-inc-reviews-71478956.htm&js=true&proxy=stealth&timeout=30000&country=us&wait_for=h1"
   }
 ]
