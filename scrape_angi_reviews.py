@@ -14,7 +14,7 @@ BUSINESSES = [
     {"id": "one-week-bath",            "angi_url": "https://www.angi.com/companylist/us/ca/van-nuys/one-week-bath-reviews-184509.htm"},
     {"id": "abc-pro",                  "angi_url": "https://www.angi.com/companylist/us/ca/reseda/abraham-building-consulting-inc-reviews-1.htm"},
     {"id": "1-degree-construction",    "angi_url": "https://www.angi.com/companylist/us/ca/dublin/-degree-construction-reviews-134063736.htm"},
-    {"id": "mr-cabinet-care",          "angi_url": "https://www.angi.com/companylist/us/ca/woodland-hills/my-home-builders-inc-reviews-1.htm"},
+    {"id": "mr-cabinet-care",          "angi_url": "https://www.angi.com/companylist/us/ca/anaheim/mr-cabinet-care-reviews-204301.htm"},
     {"id": "payless-kitchen-cabinets", "angi_url": "https://www.angi.com/companylist/us/ca/glendale/payless-kitchen-cabinets-and-bath-makeover-reviews-1.htm"},
     {"id": "adar-builders",            "angi_url": "https://www.angi.com/companylist/us/ca/los-angeles/adar-builders-inc-reviews-9993206.htm"},
     {"id": "gm-home-remodeling",       "angi_url": "https://www.angi.com/companylist/us/ca/north-hollywood/g-m-home-remodeling-inc-reviews-71478956.htm"},
