@@ -2,7 +2,7 @@ name: Scrape Angi Reviews
 
 on:
   schedule:
-    - cron: "0 9 * * 1"   # Every Monday at 9:00 AM UTC (1 hour after BBB)
+    - cron: "0 10 1 * *"   # Every Monday at 9:00 AM UTC (1 hour after BBB)
   workflow_dispatch:
 
 permissions:
